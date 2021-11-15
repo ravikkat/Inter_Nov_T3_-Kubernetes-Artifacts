@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: producebitcoinapi
+spec:
+  selector:
+    matchLabels:
+      app: producebitcoinapi
+  template:
+    metadata:
+      labels:
+        app: producebitcoinapi
+    spec:
+      containers:
+      - name: producebitcoinapi
+        image: ravikkat/producebitcoinapi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: producebitcoinapi
+spec:
+  type: NodePort
+  selector:
+    app: producebitcoinapi
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 31500
+    name: "managementbit"
+  
